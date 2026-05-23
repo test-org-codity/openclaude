@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.15.0](https://github.com/Gitlawb/openclaude/compare/v0.14.0...v0.15.0) (2026-05-23)
+
+
+### Features
+
+* **safety:** warn at startup when 3P provider + permissive mode skip the AI classifier ([#1260](https://github.com/Gitlawb/openclaude/issues/1260)) ([4e8fa24](https://github.com/Gitlawb/openclaude/commit/4e8fa24cce5de07052632d5a8a7fb4474217eab8))
+
+
+### Bug Fixes
+
+* **json-schema:** support top-level non-object roots via wrap/unwrap ([#1261](https://github.com/Gitlawb/openclaude/issues/1261)) ([07d9b4f](https://github.com/Gitlawb/openclaude/commit/07d9b4fec49dcbae67ac721ac581f4e1b3c6a4fb)), closes [#1256](https://github.com/Gitlawb/openclaude/issues/1256)
+
 ## [0.14.0](https://github.com/Gitlawb/openclaude/compare/v0.13.0...v0.14.0) (2026-05-23)
 
 
