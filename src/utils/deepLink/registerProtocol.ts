@@ -155,6 +155,23 @@ MimeType=x-scheme-handler/${DEEP_LINK_PROTOCOL};
 
   await fs.writeFile(linuxDesktopPath(), desktopEntry)
 
+  // Index the new .desktop file. `xdg-mime default` below only writes the
+  // association into mimeapps.list; the app itself is discovered through
+  // mimeinfo.cache, which is only rebuilt by update-desktop-database. Skip
+  // this and GIO-based openers (GNOME, Firefox) report the scheme as having
+  // no registered application and offer "No Apps Available" — while
+  // `xdg-mime query default` still names this file, so the registration
+  // looks complete from the terminal. Missing on headless boxes, same as
+  // xdg-mime: not a failure there, since nothing clicks links.
+  const updateDesktopDatabase = await which('update-desktop-database')
+  if (updateDesktopDatabase) {
+    await execFileNoThrow(
+      updateDesktopDatabase,
+      [path.dirname(linuxDesktopPath())],
+      { useCwd: false },
+    )
+  }
+
   // Register as the default handler for the scheme. On headless boxes
   // (WSL, Docker, CI) xdg-utils isn't installed — not a failure: there's
   // no desktop to click links from, and some apps read the .desktop
